@@ -10,15 +10,34 @@ import {
   ErrorComponent,
 } from "@pankod/refine-mui";
 
+import {
+  HomeRounded,
+  CategoryRounded,
+  PointOfSaleRounded,
+  MonetizationOnRounded,
+} from '@mui/icons-material';
+
+
 import dataProvider from "@pankod/refine-simple-rest";
 import { MuiInferencer } from "@pankod/refine-inferencer/mui";
 import routerProvider from "@pankod/refine-react-router-v6";
 import axios, { AxiosRequestConfig } from "axios";
 import { ColorModeContextProvider } from "contexts";
 import { Title, Sider, Layout, Header } from "components/layout";
-import { Login } from "pages/login";
 import { CredentialResponse } from "interfaces/google";
 import { parseJwt } from "utils/parse-jwt";
+
+import { 
+  Login,
+  Home,
+  Sales,
+  Expenses,
+  AddItems,
+  AddExpenses,
+  AddSales,
+  EditItems,
+} from "pages";
+
 
 const axiosInstance = axios.create();
 axiosInstance.interceptors.request.use((request: AxiosRequestConfig) => {
@@ -100,18 +119,22 @@ function App() {
             {
               name: "Home",
               list: MuiInferencer,
+              icon: <HomeRounded />
             },
             {
               name: "Items",
               list: MuiInferencer,
+              icon: <CategoryRounded />
             },
             {
               name: "Sale",
               list: MuiInferencer,
+              icon: <PointOfSaleRounded />
             },
             {
               name: "Expense",
               list: MuiInferencer,
+              icon: <MonetizationOnRounded />
             },
           ]}
           Title={Title}
@@ -121,6 +144,7 @@ function App() {
           routerProvider={routerProvider}
           authProvider={authProvider}
           LoginPage={Login}
+          DashboardPage={Home}
         />
       </RefineSnackbarProvider>
     </ColorModeContextProvider>
