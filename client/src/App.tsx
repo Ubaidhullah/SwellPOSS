@@ -37,6 +37,9 @@ import {
   AddSales,
   EditItems,
 } from "pages";
+import AllItems from "pages/AllItems";
+import ItemDetails from "pages/ItemDetails";
+import CreateItem from "pages/CreateItem";
 
 
 const axiosInstance = axios.create();
@@ -117,22 +120,25 @@ function App() {
           catchAll={<ErrorComponent />}
           resources={[
             {
-              name: "Home",
-              list: MuiInferencer,
+              name: "Items",
+              list: AllItems,
+              show: ItemDetails,
+              create: CreateItem,
+              edit: EditItems,
               icon: <HomeRounded />
             },
             {
-              name: "Items",
+              name: "Purchases",
               list: MuiInferencer,
               icon: <CategoryRounded />
             },
             {
-              name: "Sale",
+              name: "Sales",
               list: MuiInferencer,
               icon: <PointOfSaleRounded />
             },
             {
-              name: "Expense",
+              name: "Expenses",
               list: MuiInferencer,
               icon: <MonetizationOnRounded />
             },
