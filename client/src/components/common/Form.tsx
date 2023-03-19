@@ -29,7 +29,7 @@ const Form = ({
               {type} a Item
           </Typography>
 
-          <Box mt={2.5} borderRadius="15px" padding="20px" bgcolor="#4c4f4d">
+          <Box mt={2.5} borderRadius="15px" padding="20px" bgcolor="#fcfcfc">
               <form
                   style={{
                       marginTop: "20px",
@@ -107,19 +107,19 @@ const Form = ({
                               displayEmpty
                               required
                               inputProps={{ "aria-label": "Without label" }}
-                              defaultValue="apartment"
-                              {...register("propertyType", {
+                              defaultValue="food"
+                              {...register("itemType", {
                                   required: true,
                               })}
                           >
-                              <MenuItem value="apartment">Food</MenuItem>
-                              <MenuItem value="villa">Toys</MenuItem>
-                              <MenuItem value="farmhouse">Cages</MenuItem>
-                              <MenuItem value="condos">Live Birds</MenuItem>
-                              <MenuItem value="townhouse">WholeSale</MenuItem>
-                              <MenuItem value="duplex">Medicine</MenuItem>
-                              <MenuItem value="studio">Goods</MenuItem>
-                              <MenuItem value="chalet">Bads</MenuItem>
+                              <MenuItem value="food">Food</MenuItem>
+                              <MenuItem value="toys">Toys</MenuItem>
+                              <MenuItem value="cages">Cages</MenuItem>
+                              <MenuItem value="livebirds">Live Birds</MenuItem>
+                              <MenuItem value="wholesale">WholeSale</MenuItem>
+                              <MenuItem value="medicine">Medicine</MenuItem>
+                              <MenuItem value="goods">Goods</MenuItem>
+                              <MenuItem value="bads">Bads</MenuItem>
                           </Select>
                       </FormControl>
                       <FormControl>

@@ -1,4 +1,4 @@
-import { FormValues } from 'interfaces/property';
+import { FormValues } from 'interfaces/item';
 
 export const validateForm = (formValues: FormValues) => {
   const errors: { message: string } = { message: '' };
@@ -20,15 +20,15 @@ export const validateForm = (formValues: FormValues) => {
         }
         break;
 
-      case 'propertyType':
-        if (!formValues.propertyType) {
-          errors.message = 'Property type is required';
+      case 'itemType':
+        if (!formValues.itemType) {
+          errors.message = 'Item type is required';
           hasError = true;
         }
         break;
 
-      case 'location':
-        if (!formValues.location) {
+      case 'itemCode':
+        if (!formValues.itemCode) {
           errors.message = 'Location is required';
           hasError = true;
         }

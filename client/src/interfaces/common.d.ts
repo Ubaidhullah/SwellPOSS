@@ -17,7 +17,7 @@ export interface ProfileProps {
     properties: Array | undefined
 }
 
-export interface PropertyProps {
+export interface ItemProps {
     _id: string,
     title: string,
     description: string,

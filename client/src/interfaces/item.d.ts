@@ -8,15 +8,15 @@ export interface FormFieldProp {
 export interface FormValues {
     title: string,
     description: string,
-    propertyType: string,
-    location: string,
+    itemType: string,
+    itemCode: string,
     price: number | undefined,
 }
 
-export interface PropertyCardProps {
+export interface ItemCardProps {
   id?: BaseKey | undefined,
   title: string,
-  location: string,
+  itemCode: string,
   price: string,
   photo: string,
 }

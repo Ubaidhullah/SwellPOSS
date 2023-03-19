@@ -5,8 +5,8 @@ import { FieldValues, useForm } from "@pankod/refine-react-hook-form";
 import Form from 'components/common/Form'
 
 const CreateItem = () => {
-
-  const { data: user} = useGetIdentity()
+    
+  const { data: user} = useGetIdentity({})
   const [itemImage, setItemImage] = useState({ name: '', url: ''})
   const {
     refineCore: { onFinish, formLoading },

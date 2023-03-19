@@ -58,55 +58,75 @@ axiosInstance.interceptors.request.use((request: AxiosRequestConfig) => {
 
 function App() {
   const authProvider: AuthProvider = {
-    login: ({ credential }: CredentialResponse) => {
-      const profileObj = credential ? parseJwt(credential) : null;
+    login: async ({ credential }: CredentialResponse) => {
+        const profileObj = credential ? parseJwt(credential) : null;
 
-      if (profileObj) {
-        localStorage.setItem(
-          "user",
-          JSON.stringify({
-            ...profileObj,
-            avatar: profileObj.picture,
-          })
-        );
-      }
+        if (profileObj) {
+            const response = await fetch(
+                "http://localhost:8080/api/v1/users",
+                {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        name: profileObj.name,
+                        email: profileObj.email,
+                        avatar: profileObj.picture,
+                    }),
+                },
+            );
 
-      localStorage.setItem("token", `${credential}`);
+            const data = await response.json();
 
-      return Promise.resolve();
+            if (response.status === 200) {
+                localStorage.setItem(
+                    "user",
+                    JSON.stringify({
+                        ...profileObj,
+                        avatar: profileObj.picture,
+                        userid: data._id,
+                    }),
+                );
+            } else {
+                return Promise.reject();
+            }
+        }
+        localStorage.setItem("token", `${credential}`);
+
+        return Promise.resolve();
     },
     logout: () => {
-      const token = localStorage.getItem("token");
+        const token = localStorage.getItem("token");
 
-      if (token && typeof window !== "undefined") {
-        localStorage.removeItem("token");
-        localStorage.removeItem("user");
-        axios.defaults.headers.common = {};
-        window.google?.accounts.id.revoke(token, () => {
-          return Promise.resolve();
-        });
-      }
+        if (token && typeof window !== "undefined") {
+            localStorage.removeItem("token");
+            localStorage.removeItem("user");
+            axios.defaults.headers.common = {};
+            window.google?.accounts.id.revoke(token, () => {
+                return Promise.resolve();
+            });
+        }
 
-      return Promise.resolve();
+        return Promise.resolve();
     },
     checkError: () => Promise.resolve(),
     checkAuth: async () => {
-      const token = localStorage.getItem("token");
+        const token = localStorage.getItem("token");
 
-      if (token) {
-        return Promise.resolve();
-      }
-      return Promise.reject();
+        if (token) {
+            return Promise.resolve();
+        }
+        return Promise.reject();
     },
 
-    getPermissions: () => Promise.resolve(),
+    getPermissions: async () => null,
     getUserIdentity: async () => {
-      const user = localStorage.getItem("user");
-      if (user) {
-        return Promise.resolve(JSON.parse(user));
-      }
+        const user = localStorage.getItem("user");
+        if (user) {
+            return Promise.resolve(JSON.parse(user));
+        }
     },
-  };
+};
+
 
   return (
     <ColorModeContextProvider>
@@ -114,13 +134,13 @@ function App() {
       <GlobalStyles styles={{ html: { WebkitFontSmoothing: "auto" } }} />
       <RefineSnackbarProvider>
         <Refine
-          dataProvider={dataProvider("https://api.fake-rest.refine.dev")}
+          dataProvider={dataProvider("http://localhost:8080/api/v1")}
           notificationProvider={notificationProvider}
           ReadyPage={ReadyPage}
           catchAll={<ErrorComponent />}
           resources={[
             {
-              name: "Items",
+              name: "items",
               list: AllItems,
               show: ItemDetails,
               create: CreateItem,

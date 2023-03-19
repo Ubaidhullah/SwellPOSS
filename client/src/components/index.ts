@@ -9,18 +9,17 @@ import ItemsReferrals from './charts/ItemsReferrals';
 import TotalRevenue from './charts/TotalRevenue';
 
 // agent
-import ItemCard from './item/ItemCard';
+
 
 // home
 import TopItem from './home/TopItem';
 
 export {
   Sales,
-  ItemsCard,
   CustomButton,
   PieChart,
   ItemsReferrals,
   TotalRevenue,
-  ItemCard,
+  ItemsCard,
   TopItem,
 };
