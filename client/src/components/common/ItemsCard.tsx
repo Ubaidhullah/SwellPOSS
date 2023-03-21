@@ -35,7 +35,7 @@ const ItemsCard = ({
             <CardMedia
                 component="img"
                 width="100%"
-                height={210}
+                height={100}
                 image={photo}
                 alt="card image"
                 sx={{ borderRadius: "10px" }}
